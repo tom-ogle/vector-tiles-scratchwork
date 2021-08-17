@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  vector-tiles:
+
+services:
+
+  postgis:
+    image: postgis/postgis:13-3.1-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: imposm3
+    ports:
+      - "5432:5432"
+    networks:
+      - vector-tiles
+    volumes:
+      - ./postgis/docker-entrypoint-initdb.d/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
+
+#  postgis-openmaptiles-generated-mapping:
+#    image: postgis/postgis:13-3.1-alpine
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: openmaptiles
+#    ports:
+#      - "5433:5432"
+#    networks:
+#      - vector-tiles
+#    volumes:
+#      - ./postgis/docker-entrypoint-initdb.d/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
+#      - ./postgis/docker-entrypoint-initdb.d/setup-hstore.sql:/docker-entrypoint-initdb.d/setup-hstore.sql
