@@ -5,15 +5,26 @@ networks:
 
 services:
 
-  postgis:
-    image: postgis/postgis:13-3.1-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: imposm3
-    ports:
-      - "5432:5432"
-    networks:
-      - vector-tiles
+#  postgis:
+#    image: postgis/postgis:13-3.1-alpine
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: imposm3
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - vector-tiles
+#    volumes:
+#      - ./postgis/docker-entrypoint-initdb.d/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
+
+  web:
+    image: nginx:1.21.1-alpine
     volumes:
-      - ./postgis/docker-entrypoint-initdb.d/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./serve/:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_PORT=80
+#    command: [nginx-debug, '-g', 'daemon off;']

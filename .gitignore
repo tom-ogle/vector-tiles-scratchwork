@@ -1,2 +1,16 @@
 *.iml
 .idea/
+# Shapefile of additional data
+tilemaker/coastline/
+# Tilemaker binary
+tilemaker/bin/
+# Shapefiles of additional data
+tilemaker/landcover/
+# Temp output
+serve/output/
+# fonts
+serve/mvt-styles/osm-liberty/glyphs/
+# sprites
+serve/mvt-styles/osm-liberty/sprites/
+# The actual tiles
+serve/tiles/

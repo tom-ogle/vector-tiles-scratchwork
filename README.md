@@ -7,6 +7,8 @@ Vector tiles are used by many in-browser/app renderers, and can also power serve
 
 # Contents
 
+* Cut down area in a pbf
+  * osmium
 * Load OSM data into PostGIS
   * imposm3
   * osm2pgsql
@@ -16,6 +18,14 @@ Vector tiles are used by many in-browser/app renderers, and can also power serve
   * Directly from OSM PBF
   * Via PostGIS
 
+
+## Cut down area in a pbf
+
+### osmium
+
+```bash
+osmium extract --bbox=2.68,50.72,7.55,54.12 --set-bounds --strategy=....osm.pbf  --output ....osm.pbf
+```
 
 
 ## Load OSM data into PostGIS
@@ -158,6 +168,21 @@ Tilemaker generates vector tiles (in Mapbox Vector Tile format) from OSM PBF for
 * https://tilemaker.org/
 * https://github.com/systemed/tilemaker
 * Permissive license!
+
+
+* Download https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip and unzip so `coastline/water_polygons.shp` can be found.
+* Build tilemaker from the github repo `https://github.com/systemed/tilemaker` so `tilemaker/bin/tilemaker` can be found.
+
+--config: A JSON file listing each layer, and the zoom levels at which to apply it
+--process: A Lua program that looks at each node/way's tags, and places it into layers accordingly
+
+```bash
+cd tilemaker &&
+./bin/tilemaker --input ../osm-pbf-data/south-yorkshire-latest.osm.pbf \
+    --config ./resources/config-openmaptiles.json \
+    --process ./resources/process-openmaptiles.lua \
+    --output ../serve/tiles
+```
 
 
 ### Via PostGIS
