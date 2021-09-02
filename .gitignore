@@ -8,9 +8,12 @@ tilemaker/bin/
 tilemaker/landcover/
 # Temp output
 serve/output/
-# fonts
-serve/mvt-styles/osm-liberty/glyphs/
 # sprites
 serve/mvt-styles/osm-liberty/sprites/
 # The actual tiles
 serve/tiles/
+# fonts
+serve/mvt-styles/osm-liberty/glyphs/*
+!serve/mvt-styles/osm-liberty/glyphs/Roboto Regular
+!serve/mvt-styles/osm-liberty/glyphs/Roboto Condensed Italic
+!serve/mvt-styles/osm-liberty/glyphs/Roboto Medium
